@@ -1,0 +1,11 @@
+{
+  "name": "screenshot-demo-sites",
+  "private": true,
+  "version": "0.0.0",
+  "main": "index.js",
+  "author": "Philip Jackson <p-jackson@live.com>",
+  "license": "GPL-2.0-or-later",
+  "dependencies": {
+    "capture-website": "^0.6.0"
+  }
+}
