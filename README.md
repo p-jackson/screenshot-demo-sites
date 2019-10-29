@@ -10,5 +10,4 @@ effects on cover images.
 
 Screenshots that need to be manually generated:
 - Exford (just desktop)
-- Leven (desktop + phone)
 - Rockfield (desktop + phone)

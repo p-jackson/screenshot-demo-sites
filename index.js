@@ -8,18 +8,18 @@ const captureWebsite = require("capture-website");
 const mkdir = promisify(fs.mkdir);
 
 const DEMO_SITES = {
-  leven: "https://levendemo.wordpress.com/?demo",
-  rockfield: "https://rockfielddemo.wordpress.com/?demo",
-  coutoire: "https://coutoiredemo.wordpress.com/?demo",
-  morden: "https://mordendemo.wordpress.com/?demo",
-  stratford: "https://stratforddemo.wordpress.com/?demo",
-  exford: "https://exforddemo.wordpress.com/?demo",
-  alves: "https://alvesdemo.wordpress.com/?demo",
-  rivington: "https://rivingtondemo.wordpress.com/?demo",
-  mayland: "https://maylanddemo.wordpress.com/?demo",
-  dalston: "https://dalstondemo.wordpress.com/?demo",
-  barnsbury: "https://barnsburydemo.wordpress.com/?demo",
-  balasana: "https://balasanademo.wordpress.com/?demo"
+  leven: "https://levendemo.wordpress.com/?demo"
+  // rockfield: "https://rockfielddemo.wordpress.com/?demo",
+  // coutoire: "https://coutoiredemo.wordpress.com/?demo",
+  // morden: "https://mordendemo.wordpress.com/?demo",
+  // stratford: "https://stratforddemo.wordpress.com/?demo",
+  // exford: "https://exforddemo.wordpress.com/?demo",
+  // alves: "https://alvesdemo.wordpress.com/?demo",
+  // rivington: "https://rivingtondemo.wordpress.com/?demo",
+  // mayland: "https://maylanddemo.wordpress.com/?demo",
+  // dalston: "https://dalstondemo.wordpress.com/?demo",
+  // barnsbury: "https://barnsburydemo.wordpress.com/?demo",
+  // balasana: "https://balasanademo.wordpress.com/?demo"
 };
 
 async function run() {
@@ -67,7 +67,22 @@ async function capture(url, output, isDesktop) {
     clickElement: ['.widget_eu_cookie_law_widget input[type="submit"]'],
     delay: 2, // Wait while the cookie banner fades out
     type: "jpeg",
-    quality: 0.3
+    quality: 0.3,
+    beforeScreenshot: async page => {
+      await removeParallax(page);
+    }
+  });
+}
+
+/**
+ * @param {import('puppeteer').Page} page
+ */
+async function removeParallax(page) {
+  await page.evaluate(() => {
+    const elements = document.querySelectorAll(".has-parallax");
+    for (const element of elements) {
+      element.classList.remove("has-parallax");
+    }
   });
 }
 
